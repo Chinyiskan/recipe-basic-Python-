@@ -2,19 +2,12 @@ from pathlib import Path
 
 
 def leer_receta(categoria, nombre_receta):
-    ruta_categoria = Path(f"D:/coding/recetario/Recetas/{categoria}")
+    # Set the path for the recipe to read
+    ruta_receta = Path(f"D:/coding/recetario/Recetas/{categoria}/{nombre_receta}.txt")
 
-    if not ruta_categoria.exists():
-        print(f"La categoría '{categoria}' no existe.")
-        return
-
-    ruta_receta = ruta_categoria / f"{nombre_receta}.txt"
-
-    if not ruta_receta.exists():
-        print(f"La receta '{nombre_receta}' no existe en la categoría '{categoria}'.")
-        return
-
-    with open(ruta_receta, 'r', encoding='utf-8') as archivo:
-        contenido = archivo.read()
-    
-    print(f"Contenido de la receta '{nombre_receta}':\n{contenido}")
+    # Read and print the content of the recipe file
+    if ruta_receta.exists():
+        with open(ruta_receta, "r", encoding="utf-8") as archivo:
+            print(archivo.read())
+    else:
+        print("Recipe not found.")

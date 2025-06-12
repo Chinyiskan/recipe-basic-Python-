@@ -1,15 +1,15 @@
 from pathlib import Path
 
 def eliminar_categoria(nombre_categoria):
-    ruta_base = Path("D:/coding/recetario/Recetas")
-    ruta_categoria = ruta_base / nombre_categoria
+    # Set the path for the category to delete
+    ruta_categoria = Path(f"D:/coding/recetario/Recetas/{nombre_categoria}")
 
-    if not ruta_categoria.exists():
+    # Delete the category directory and all its contents if it exists
+    if ruta_categoria.exists() and ruta_categoria.is_dir():
+        for archivo in ruta_categoria.iterdir():
+            archivo.unlink()  # Delete each file in the category
+        ruta_categoria.rmdir()  # Remove the category directory
+
+        print(f"Categoría '{nombre_categoria}' eliminada exitosamente.")
+    else:
         print(f"La categoría '{nombre_categoria}' no existe.")
-        return
-
-    for archivo in ruta_categoria.iterdir():
-        archivo.unlink()  # Elimina los archivos dentro de la categoría
-    ruta_categoria.rmdir()  # Elimina la carpeta de la categoría
-
-    print(f"Categoría '{nombre_categoria}' eliminada exitosamente.")
